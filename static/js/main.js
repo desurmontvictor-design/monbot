@@ -56,8 +56,8 @@ swatches.forEach((swatch) => {
 
     if (appColorLabel) appColorLabel.textContent = swatch.dataset.color;
 
-    document.querySelectorAll(".connect-slide.active img").forEach((img) => {
-      img.style.filter = swatch.dataset.filter || "none";
+    document.querySelectorAll(".connect-slide.active .ph").forEach((ph) => {
+      ph.style.filter = swatch.dataset.filter || "none";
     });
   });
 });

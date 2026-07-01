@@ -150,11 +150,31 @@ em { font-style: italic; font-family: var(--font-serif); color: var(--accent); }
 }
 
 .hero-img {
-  position: absolute; inset: 0; height: 100%; object-fit: cover;
+  position: absolute; inset: 0; height: 100%; width: 100%;
   transform: scale(1.06);
   animation: hero-zoom 18s var(--ease) forwards;
 }
 @keyframes hero-zoom { to { transform: scale(1); } }
+
+/* Photo placeholders (no external network dependency) */
+.ph {
+  position: relative;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #3a3d42 0%, #1b1c20 55%, #2c2620 100%);
+}
+.ph::after {
+  content: attr(aria-label);
+  position: absolute; left: 1.4rem; bottom: 1.4rem;
+  color: rgba(248,246,242,0.55);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  max-width: 80%;
+}
+.ph--hero { background: linear-gradient(135deg, #4a4038 0%, #201d1a 50%, #2e3a34 100%); }
+.ph--veste { background: linear-gradient(135deg, #2c3a4f 0%, #171b22 60%); }
+.ph--pantalon { background: linear-gradient(135deg, #3a3226 0%, #17140f 60%); }
+.ph--releve { background: linear-gradient(135deg, #4a4438 0%, #201e1a 60%); }
 
 .hero-vignette {
   position: absolute; inset: 0;
@@ -267,7 +287,7 @@ em { font-style: italic; font-family: var(--font-serif); color: var(--accent); }
   transition: opacity 0.6s var(--ease);
 }
 .connect-slide.active { opacity: 1; }
-.connect-slide img { height: 100%; object-fit: cover; transition: filter 0.6s var(--ease); }
+.connect-slide .ph { transition: filter 0.6s var(--ease); }
 
 .app-mock {
   position: absolute;
@@ -413,7 +433,6 @@ em { font-style: italic; font-family: var(--font-serif); color: var(--accent); }
 }
 
 .releve-media { position: relative; overflow: hidden; background: var(--ink); min-height: 480px; }
-.releve-media img { height: 100%; object-fit: cover; }
 
 .releve-copy {
   padding: clamp(3rem, 6vw, 6rem);
