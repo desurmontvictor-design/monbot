@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OZZA — L'excellence, redéfinie</title>
+<meta name="description" content="OZZA — Maison de luxe. Découvrez une collection d'exception, façonnée par le savoir-faire et la rareté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="glass-blobs" aria-hidden="true">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <span class="blob blob-3"></span>
+</div>
+
+<header class="nav">
+  <div class="nav-inner glass">
+    <a href="#" class="logo">OZZA</a>
+    <nav class="nav-links">
+      <a href="#collection">Collection</a>
+      <a href="#histoire">Maison</a>
+      <a href="#valeurs">Valeurs</a>
+      <a href="#membership">Membership</a>
+    </nav>
+    <a href="#membership" class="btn btn-ghost">Accès privé</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Édition limitée — Automne 2026</p>
+      <h1>L'excellence<br><em>ne se réplique pas.</em></h1>
+      <p class="hero-sub">OZZA façonne des objets rares, pensés pour traverser le temps. Chaque pièce est une décision, pas un compromis.</p>
+      <div class="hero-actions">
+        <a href="#collection" class="btn btn-primary">Découvrir la collection</a>
+        <a href="#membership" class="btn btn-outline">Demander une invitation</a>
+      </div>
+    </div>
+    <div class="hero-glass-panel glass" aria-hidden="true">
+      <div class="panel-shine"></div>
+    </div>
+  </section>
+
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>SAVOIR-FAIRE</span><span>·</span><span>RARETÉ</span><span>·</span><span>HÉRITAGE</span><span>·</span><span>EXCELLENCE</span><span>·</span>
+      <span>SAVOIR-FAIRE</span><span>·</span><span>RARETÉ</span><span>·</span><span>HÉRITAGE</span><span>·</span><span>EXCELLENCE</span><span>·</span>
+    </div>
+  </section>
+
+  <section id="collection" class="collection">
+    <div class="section-head">
+      <p class="eyebrow">La collection</p>
+      <h2>Trois pièces. Une seule idée : la perfection.</h2>
+    </div>
+    <div class="product-grid">
+      <article class="product-card glass reveal">
+        <div class="product-media product-media--onyx"></div>
+        <div class="product-body">
+          <span class="product-tag">Nouveauté</span>
+          <h3>Le Manteau Onyx</h3>
+          <p>Laine vierge tissée à la main, doublure en soie. 48 heures d'assemblage par pièce.</p>
+          <div class="product-footer">
+            <span class="price">3 200 €</span>
+            <a href="#membership" class="link-arrow">Réserver →</a>
+          </div>
+        </div>
+      </article>
+      <article class="product-card glass reveal">
+        <div class="product-media product-media--ambre"></div>
+        <div class="product-body">
+          <span class="product-tag">Édition limitée · 200 ex.</span>
+          <h3>La Montre Ambre</h3>
+          <p>Boîtier en titane brossé, mouvement suisse à remontage manuel.</p>
+          <div class="product-footer">
+            <span class="price">7 900 €</span>
+            <a href="#membership" class="link-arrow">Réserver →</a>
+          </div>
+        </div>
+      </article>
+      <article class="product-card glass reveal">
+        <div class="product-media product-media--ivoire"></div>
+        <div class="product-body">
+          <span class="product-tag">Signature</span>
+          <h3>Le Sac Ivoire</h3>
+          <p>Cuir pleine fleur, ferrures plaquées palladium, numéroté à la main.</p>
+          <div class="product-footer">
+            <span class="price">2 450 €</span>
+            <a href="#membership" class="link-arrow">Réserver →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="histoire" class="story">
+    <div class="story-glass glass reveal">
+      <p class="eyebrow">La Maison</p>
+      <h2>Née d'une obsession pour le détail.</h2>
+      <p class="story-text">
+        OZZA est née d'une conviction simple : le luxe véritable ne se mesure pas à son prix, mais à
+        l'intention qui le précède. Depuis nos ateliers, une poignée d'artisans façonne chaque pièce
+        avec une exigence presque déraisonnable — parce que l'excellence ne tolère aucune approximation.
+      </p>
+      <p class="story-text">
+        Nous ne produisons pas en masse. Nous ne suivons pas les tendances. Nous créons des objets
+        destinés à devenir des héritages.
+      </p>
+    </div>
+  </section>
+
+  <section id="valeurs" class="values">
+    <div class="section-head">
+      <p class="eyebrow">Nos valeurs</p>
+      <h2>Ce qui ne change jamais.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card glass reveal">
+        <span class="value-index">01</span>
+        <h3>Savoir-faire</h3>
+        <p>Des artisans formés pendant des années, pour des gestes qu'aucune machine ne reproduit.</p>
+      </div>
+      <div class="value-card glass reveal">
+        <span class="value-index">02</span>
+        <h3>Rareté</h3>
+        <p>Des séries volontairement limitées. Ce qui est rare a de la valeur — et du sens.</p>
+      </div>
+      <div class="value-card glass reveal">
+        <span class="value-index">03</span>
+        <h3>Intégrité</h3>
+        <p>Des matières tracées, des ateliers visités, des engagements tenus.</p>
+      </div>
+      <div class="value-card glass reveal">
+        <span class="value-index">04</span>
+        <h3>Permanence</h3>
+        <p>Des pièces conçues pour durer des décennies, pas des saisons.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="membership" class="membership">
+    <div class="membership-glass glass reveal">
+      <p class="eyebrow">Membership OZZA</p>
+      <h2>Un accès. Pas un abonnement.</h2>
+      <p class="membership-text">
+        Le cercle OZZA donne accès aux pièces avant leur sortie publique, à des éditions
+        réservées aux membres, et à un service de conciergerie personnel.
+      </p>
+      <form class="membership-form" id="membership-form">
+        <input type="email" required placeholder="Votre adresse e-mail" aria-label="Adresse e-mail">
+        <button type="submit" class="btn btn-primary">Demander une invitation</button>
+      </form>
+      <p class="membership-note" id="membership-note" role="status"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="logo">OZZA</span>
+    <p>&copy; 2026 OZZA Maison. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
