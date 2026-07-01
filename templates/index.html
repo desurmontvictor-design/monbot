@@ -1,175 +1,474 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OZZA — L'excellence, redéfinie</title>
-<meta name="description" content="OZZA — Maison de luxe. Découvrez une collection d'exception, façonnée par le savoir-faire et la rareté.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OZZA — High Cruiser</title>
+  <meta name="description" content="OZZA — High Cruiser. La veste qui se transforme avec vous. Prêt-à-porter de luxe, innovation discrète.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
 
-<div class="glass-blobs" aria-hidden="true">
-  <span class="blob blob-1"></span>
-  <span class="blob blob-2"></span>
-  <span class="blob blob-3"></span>
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div class="nav-wrap">
+    <div class="nav-left">
+      <a href="#collection">Collection</a>
+      <a href="#jacket">La Veste</a>
+    </div>
+
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-main">OZZA</span>
+      <span class="nav-logo-sub">High Cruiser</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="#maison">La Maison</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <button class="nav-burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="drawer">
+  <a href="#collection">Collection</a>
+  <a href="#jacket">La Veste</a>
+  <a href="#maison">La Maison</a>
+  <a href="#contact">Contact</a>
 </div>
 
-<header class="nav">
-  <div class="nav-inner glass">
-    <a href="#" class="logo">OZZA</a>
-    <nav class="nav-links">
-      <a href="#collection">Collection</a>
-      <a href="#histoire">Maison</a>
-      <a href="#valeurs">Valeurs</a>
-      <a href="#membership">Membership</a>
-    </nav>
-    <a href="#membership" class="btn btn-ghost">Accès privé</a>
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <img
+    class="hero-img"
+    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=90&auto=format&fit=crop&crop=center"
+    alt="OZZA — Collection"
+    loading="eager"
+  >
+  <div class="hero-vignette"></div>
+
+  <div class="hero-text">
+    <div class="hero-title-wrap">
+      <p class="hero-eyebrow">Collection Automne — Hiver 2024</p>
+      <h1 class="hero-title">Innovation<br><em>Discrète</em></h1>
+    </div>
+    <div class="hero-meta">
+      <p>La veste qui se transforme avec vous. Une technologie invisible au service d'une élégance absolue.</p>
+      <a href="#collection" class="hero-scroll-link">
+        <span class="hero-scroll-line"></span>
+        Découvrir
+      </a>
+    </div>
   </div>
-</header>
+</section>
 
-<main>
+<!-- ─── STATEMENT ─── -->
+<section id="statement">
+  <p class="statement-text reveal">
+    « Nous créons des vêtements pour ceux qui n'ont<br>
+    rien à prouver — seulement tout à <em>ressentir.</em> »
+  </p>
+  <div class="statement-rule"></div>
+</section>
 
-  <section class="hero">
-    <div class="hero-content">
-      <p class="eyebrow">Édition limitée — Automne 2026</p>
-      <h1>L'excellence<br><em>ne se réplique pas.</em></h1>
-      <p class="hero-sub">OZZA façonne des objets rares, pensés pour traverser le temps. Chaque pièce est une décision, pas un compromis.</p>
-      <div class="hero-actions">
-        <a href="#collection" class="btn btn-primary">Découvrir la collection</a>
-        <a href="#membership" class="btn btn-outline">Demander une invitation</a>
+<!-- ─── COLLECTION ─── -->
+<section id="collection" style="padding-top: clamp(4rem,7vw,7rem);">
+  <div style="padding: 0 var(--pad-x);">
+
+    <div class="s-header reveal">
+      <div>
+        <p class="s-eyebrow">Saison 2024</p>
+        <h2 class="s-title">La Collection</h2>
       </div>
-    </div>
-    <div class="hero-glass-panel glass" aria-hidden="true">
-      <div class="panel-shine"></div>
-    </div>
-  </section>
-
-  <section class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>SAVOIR-FAIRE</span><span>·</span><span>RARETÉ</span><span>·</span><span>HÉRITAGE</span><span>·</span><span>EXCELLENCE</span><span>·</span>
-      <span>SAVOIR-FAIRE</span><span>·</span><span>RARETÉ</span><span>·</span><span>HÉRITAGE</span><span>·</span><span>EXCELLENCE</span><span>·</span>
-    </div>
-  </section>
-
-  <section id="collection" class="collection">
-    <div class="section-head">
-      <p class="eyebrow">La collection</p>
-      <h2>Trois pièces. Une seule idée : la perfection.</h2>
-    </div>
-    <div class="product-grid">
-      <article class="product-card glass reveal">
-        <div class="product-media product-media--onyx"></div>
-        <div class="product-body">
-          <span class="product-tag">Nouveauté</span>
-          <h3>Le Manteau Onyx</h3>
-          <p>Laine vierge tissée à la main, doublure en soie. 48 heures d'assemblage par pièce.</p>
-          <div class="product-footer">
-            <span class="price">3 200 €</span>
-            <a href="#membership" class="link-arrow">Réserver →</a>
-          </div>
+      <div style="display:flex; gap:2rem; align-items:center;">
+        <div class="collection-filters">
+          <button class="c-filter active" data-f="all">Tout</button>
+          <button class="c-filter" data-f="vestes">Vestes</button>
+          <button class="c-filter" data-f="maroquinerie">Maroquinerie</button>
+          <button class="c-filter" data-f="bijouterie">Bijouterie</button>
+          <button class="c-filter" data-f="accessoires">Accessoires</button>
         </div>
-      </article>
-      <article class="product-card glass reveal">
-        <div class="product-media product-media--ambre"></div>
-        <div class="product-body">
-          <span class="product-tag">Édition limitée · 200 ex.</span>
-          <h3>La Montre Ambre</h3>
-          <p>Boîtier en titane brossé, mouvement suisse à remontage manuel.</p>
-          <div class="product-footer">
-            <span class="price">7 900 €</span>
-            <a href="#membership" class="link-arrow">Réserver →</a>
-          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p-grid reveal" style="padding: 0 var(--pad-x); gap:2px;">
+
+    <!-- Wide hero product -->
+    <div class="p-card p-card--wide" data-cat="vestes">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&q=85&auto=format&fit=crop&crop=center" alt="Veste Chromatique I" loading="lazy">
+        <span class="p-badge">Nouveauté</span>
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Veste Chromatique I</p>
+          <p class="p-sub">Laine mérinos · Tech-fiber OZZA · Doublure soie</p>
         </div>
-      </article>
-      <article class="product-card glass reveal">
-        <div class="product-media product-media--ivoire"></div>
-        <div class="product-body">
-          <span class="product-tag">Signature</span>
-          <h3>Le Sac Ivoire</h3>
-          <p>Cuir pleine fleur, ferrures plaquées palladium, numéroté à la main.</p>
-          <div class="product-footer">
-            <span class="price">2 450 €</span>
-            <a href="#membership" class="link-arrow">Réserver →</a>
-          </div>
+        <span class="p-price">3 800 €</span>
+      </div>
+    </div>
+
+    <!-- Standard -->
+    <div class="p-card" data-cat="vestes">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1548712218-777eb8fc8b2c?w=700&q=85&auto=format&fit=crop" alt="Veste Aura" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Veste Aura</p>
+          <p class="p-sub">Cachemire double face</p>
         </div>
-      </article>
+        <span class="p-price">4 200 €</span>
+      </div>
     </div>
-  </section>
 
-  <section id="histoire" class="story">
-    <div class="story-glass glass reveal">
-      <p class="eyebrow">La Maison</p>
-      <h2>Née d'une obsession pour le détail.</h2>
-      <p class="story-text">
-        OZZA est née d'une conviction simple : le luxe véritable ne se mesure pas à son prix, mais à
-        l'intention qui le précède. Depuis nos ateliers, une poignée d'artisans façonne chaque pièce
-        avec une exigence presque déraisonnable — parce que l'excellence ne tolère aucune approximation.
+    <!-- Standard -->
+    <div class="p-card" data-cat="maroquinerie">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&q=85&auto=format&fit=crop" alt="Sac Aether" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Sac Aether</p>
+          <p class="p-sub">Veau pleine fleur · Coutures sellier</p>
+        </div>
+        <span class="p-price">1 650 €</span>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="bijouterie">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?w=700&q=85&auto=format&fit=crop" alt="Montre Solstice" loading="lazy">
+        <span class="p-badge">Édition limitée</span>
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Montre Solstice</p>
+          <p class="p-sub">Titane · Cadran ardoise</p>
+        </div>
+        <span class="p-price">6 400 €</span>
+      </div>
+    </div>
+
+    <!-- Wide -->
+    <div class="p-card p-card--wide" data-cat="accessoires">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=85&auto=format&fit=crop&crop=top" alt="Écharpe Nuage" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Écharpe Nuage</p>
+          <p class="p-sub">Cachemire Mongolia · 4 fils</p>
+        </div>
+        <span class="p-price">480 €</span>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="vestes">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1512327536842-5aa37d1ba3e3?w=700&q=85&auto=format&fit=crop" alt="Manteau Obsidienne" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Manteau Obsidienne</p>
+          <p class="p-sub">Loden autrichien · Boutons nacre</p>
+        </div>
+        <span class="p-price">2 950 €</span>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="bijouterie">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700&q=85&auto=format&fit=crop" alt="Bracelet Onde" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Bracelet Onde</p>
+          <p class="p-sub">Or blanc 18k · Diamants taille brillant</p>
+        </div>
+        <span class="p-price">2 100 €</span>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="maroquinerie">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=700&q=85&auto=format&fit=crop" alt="Portefeuille Ligne" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Portefeuille Ligne</p>
+          <p class="p-sub">Box calf naturel · Or 18k</p>
+        </div>
+        <span class="p-price">420 €</span>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="accessoires">
+      <div class="p-img">
+        <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=700&q=85&auto=format&fit=crop" alt="Gants Obsession" loading="lazy">
+      </div>
+      <div class="p-info">
+        <div>
+          <p class="p-name">Gants Obsession</p>
+          <p class="p-sub">Agneau nappa · Doublure cachemire</p>
+        </div>
+        <span class="p-price">340 €</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── JACKET ─── -->
+<section id="jacket" style="margin-top: clamp(4rem,7vw,7rem);">
+
+  <div class="jacket-left">
+    <div class="j-slides" id="jSlides">
+      <div class="j-slide active" data-color="Bleu Profond">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&auto=format&fit=crop&crop=center" alt="Bleu Profond" loading="lazy">
+      </div>
+      <div class="j-slide" data-color="Vert Sauge">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=85&auto=format&fit=crop" alt="Vert Sauge" loading="lazy">
+      </div>
+      <div class="j-slide" data-color="Prune Nuit">
+        <img src="https://images.unsplash.com/photo-1512327536842-5aa37d1ba3e3?w=900&q=85&auto=format&fit=crop" alt="Prune Nuit" loading="lazy">
+      </div>
+      <div class="j-slide" data-color="Caramel Doré">
+        <img src="https://images.unsplash.com/photo-1548712218-777eb8fc8b2c?w=900&q=85&auto=format&fit=crop" alt="Caramel Doré" loading="lazy">
+      </div>
+    </div>
+
+    <span class="j-color-tag" id="jColorTag">Bleu Profond</span>
+
+    <div class="j-nav" id="jNav">
+      <div class="j-dot active" data-i="0"></div>
+      <div class="j-dot" data-i="1"></div>
+      <div class="j-dot" data-i="2"></div>
+      <div class="j-dot" data-i="3"></div>
+    </div>
+  </div>
+
+  <div class="jacket-right">
+    <p class="s-eyebrow reveal">Technologie OZZA</p>
+    <h2 class="j-title reveal">La veste qui<br><em>se transforme</em><br>avec vous.</h2>
+    <p class="j-desc reveal">Première veste au monde à changer de couleur via application smartphone. Dix-huit teintes disponibles. La même pièce, dix-huit personnalités.</p>
+
+    <div class="j-specs reveal">
+      <div class="j-spec">
+        <span class="j-spec-label">Autonomie</span>
+        <span class="j-spec-value">48 heures</span>
+      </div>
+      <div class="j-spec">
+        <span class="j-spec-label">Contrôle</span>
+        <span class="j-spec-value">iOS & Android</span>
+      </div>
+      <div class="j-spec">
+        <span class="j-spec-label">Teintes</span>
+        <span class="j-spec-value">18 couleurs</span>
+      </div>
+      <div class="j-spec">
+        <span class="j-spec-label">Matière</span>
+        <span class="j-spec-value">Laine mérinos + Tech-fiber</span>
+      </div>
+      <div class="j-spec">
+        <span class="j-spec-label">Prix</span>
+        <span class="j-spec-value">3 800 €</span>
+      </div>
+    </div>
+
+    <a href="#contact" class="j-cta reveal">
+      Prendre rendez-vous
+      <span class="j-cta-arrow"></span>
+    </a>
+  </div>
+
+</section>
+
+<!-- ─── MAISON ─── -->
+<section id="maison">
+  <div class="maison-inner">
+
+    <div class="maison-left">
+      <p class="s-eyebrow reveal">Depuis 2008</p>
+      <h2 class="maison-title reveal">Une maison<br>fondée sur l'art<br>de <em>l'invisible.</em></h2>
+      <p class="maison-body reveal">
+        Fondée à Milan en 2008 par un collectif de designers et d'ingénieurs textiles, OZZA a toujours refusé de choisir entre innovation et tradition. Chaque pièce est produite en série limitée, dans nos ateliers de la Via Montenapoleone. En 2024, la maison se réinvente avec sa première collection intelligente — sans jamais compromettre l'essentiel.
       </p>
-      <p class="story-text">
-        Nous ne produisons pas en masse. Nous ne suivons pas les tendances. Nous créons des objets
-        destinés à devenir des héritages.
-      </p>
-    </div>
-  </section>
 
-  <section id="valeurs" class="values">
-    <div class="section-head">
-      <p class="eyebrow">Nos valeurs</p>
-      <h2>Ce qui ne change jamais.</h2>
-    </div>
-    <div class="values-grid">
-      <div class="value-card glass reveal">
-        <span class="value-index">01</span>
-        <h3>Savoir-faire</h3>
-        <p>Des artisans formés pendant des années, pour des gestes qu'aucune machine ne reproduit.</p>
-      </div>
-      <div class="value-card glass reveal">
-        <span class="value-index">02</span>
-        <h3>Rareté</h3>
-        <p>Des séries volontairement limitées. Ce qui est rare a de la valeur — et du sens.</p>
-      </div>
-      <div class="value-card glass reveal">
-        <span class="value-index">03</span>
-        <h3>Intégrité</h3>
-        <p>Des matières tracées, des ateliers visités, des engagements tenus.</p>
-      </div>
-      <div class="value-card glass reveal">
-        <span class="value-index">04</span>
-        <h3>Permanence</h3>
-        <p>Des pièces conçues pour durer des décennies, pas des saisons.</p>
+      <div class="maison-values reveal">
+        <div class="m-value">
+          <span class="m-value-label">Innovation</span>
+          <p class="m-value-text">Technologie textile de pointe intégrée dans chaque pièce.</p>
+        </div>
+        <div class="m-value">
+          <span class="m-value-label">Minimalisme</span>
+          <p class="m-value-text">L'essentiel. Rien de moins, rien de plus.</p>
+        </div>
+        <div class="m-value">
+          <span class="m-value-label">Durabilité</span>
+          <p class="m-value-text">Matières responsables, production éthique.</p>
+        </div>
+        <div class="m-value">
+          <span class="m-value-label">Exclusivité</span>
+          <p class="m-value-text">Éditions limitées. Pièces numérotées.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section id="membership" class="membership">
-    <div class="membership-glass glass reveal">
-      <p class="eyebrow">Membership OZZA</p>
-      <h2>Un accès. Pas un abonnement.</h2>
-      <p class="membership-text">
-        Le cercle OZZA donne accès aux pièces avant leur sortie publique, à des éditions
-        réservées aux membres, et à un service de conciergerie personnel.
-      </p>
-      <form class="membership-form" id="membership-form">
-        <input type="email" required placeholder="Votre adresse e-mail" aria-label="Adresse e-mail">
-        <button type="submit" class="btn btn-primary">Demander une invitation</button>
-      </form>
-      <p class="membership-note" id="membership-note" role="status"></p>
+    <div class="maison-right reveal">
+      <div class="maison-stat">
+        <span class="maison-stat-n">16</span>
+        <span class="maison-stat-l">Ans d'excellence</span>
+      </div>
+      <img
+        class="maison-img-main"
+        src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=700&q=85&auto=format&fit=crop&crop=top"
+        alt="Atelier OZZA Milan"
+        loading="lazy"
+      >
+      <img
+        class="maison-img-inset"
+        src="https://images.unsplash.com/photo-1544441893-675973e31985?w=400&q=80&auto=format&fit=crop"
+        alt="Savoir-faire"
+        loading="lazy"
+      >
     </div>
-  </section>
 
-</main>
+  </div>
+</section>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <span class="logo">OZZA</span>
-    <p>&copy; 2026 OZZA Maison. Tous droits réservés.</p>
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-left">
+      <p class="s-eyebrow reveal">Expérience Privée</p>
+      <h2 class="contact-title reveal">Rejoindre<br>l'univers <em>OZZA.</em></h2>
+      <p class="contact-body reveal">Nos conseillers dédiés vous accompagnent vers la pièce qui vous ressemble. Showrooms sur rendez-vous.</p>
+
+      <div class="contact-locs reveal">
+        <div class="c-loc">
+          <span class="c-loc-city">Milan — Siège</span>
+          <span class="c-loc-addr">Via Montenapoleone, 8</span>
+        </div>
+        <div class="c-loc">
+          <span class="c-loc-city">Paris</span>
+          <span class="c-loc-addr">8 Place Vendôme, 75001</span>
+        </div>
+        <div class="c-loc">
+          <span class="c-loc-city">Genève</span>
+          <span class="c-loc-addr">Rue du Rhône, 48</span>
+        </div>
+        <div class="c-loc" style="border-bottom:none;">
+          <span class="c-loc-city">E-mail</span>
+          <span class="c-loc-addr">experience@ozza-highcruiser.com</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="f-row">
+        <div class="f-field">
+          <label class="f-label" for="fname">Prénom</label>
+          <input class="f-input" type="text" id="fname" placeholder="Alexandre">
+        </div>
+        <div class="f-field">
+          <label class="f-label" for="lname">Nom</label>
+          <input class="f-input" type="text" id="lname" placeholder="Dumont">
+        </div>
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="email">E-mail</label>
+        <input class="f-input" type="email" id="email" placeholder="alexandre@exemple.com">
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="subject">Sujet</label>
+        <select class="f-input" id="subject">
+          <option value="" disabled selected>Sélectionner…</option>
+          <option>Prendre rendez-vous en showroom</option>
+          <option>La veste intelligente</option>
+          <option>Sur-mesure</option>
+          <option>Autre demande</option>
+        </select>
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="msg">Message</label>
+        <textarea class="f-input" id="msg" rows="4" placeholder="Votre message…"></textarea>
+      </div>
+      <button type="submit" class="f-submit" id="fSubmit">
+        Envoyer
+        <svg width="18" height="1" viewBox="0 0 18 1"><line x1="0" y1="0" x2="18" y2="0" stroke="currentColor"/></svg>
+      </button>
+    </form>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="f-brand">
+      <span class="f-logo">OZZA</span>
+      <span class="f-logo-sub">High Cruiser</span>
+      <p class="f-brand-desc">Prêt-à-porter de luxe depuis 2008. La discrétion comme signature. L'innovation comme héritage.</p>
+      <div class="f-socials">
+        <a href="#" class="f-social">Instagram</a>
+        <a href="#" class="f-social">Pinterest</a>
+        <a href="#" class="f-social">LinkedIn</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="f-col-title">Collection</p>
+      <ul class="f-links">
+        <li><a href="#collection">Vestes Intelligentes</a></li>
+        <li><a href="#collection">Maroquinerie</a></li>
+        <li><a href="#collection">Bijouterie</a></li>
+        <li><a href="#collection">Accessoires</a></li>
+        <li><a href="#collection">Éditions Limitées</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="f-col-title">La Maison</p>
+      <ul class="f-links">
+        <li><a href="#maison">Notre Histoire</a></li>
+        <li><a href="#jacket">La Technologie</a></li>
+        <li><a href="#maison">Nos Valeurs</a></li>
+        <li><a href="#contact">Showrooms</a></li>
+        <li><a href="#contact">Presse</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="f-col-title">Service</p>
+      <ul class="f-links">
+        <li><a href="#contact">Rendez-vous Privé</a></li>
+        <li><a href="#contact">Sur-mesure</a></li>
+        <li><a href="#contact">Service Après-vente</a></li>
+        <li><a href="#contact">Livraison</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="f-copy">© 2024 OZZA High Cruiser. Tous droits réservés.</p>
+    <div class="f-legal">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">CGV</a>
+    </div>
   </div>
 </footer>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
