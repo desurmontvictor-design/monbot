@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OZZA — Maison de luxe française depuis 1985</title>
+<meta name="description" content="OZZA, maison française de textile de luxe depuis 1985. Découvrez la veste intelligente : innovation, élégance et mode responsable.">
+
+<style>
+  /* ============================================================
+     RESET & BASE
+     ============================================================ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --noir: #0d0d0d;
+    --blanc: #ffffff;
+    --creme: #f7f5f2;
+    --gris: #6b6b6b;
+    --gris-clair: #e4e1dc;
+    --or: #b08d57;
+    --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--noir);
+    background: var(--blanc);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  ul { list-style: none; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 12px;
+    color: var(--or);
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 16px 42px;
+    border: 1px solid var(--noir);
+    background: var(--noir);
+    color: var(--blanc);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  .btn:hover { background: transparent; color: var(--noir); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--blanc);
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+  .btn-outline:hover { background: var(--blanc); color: var(--noir); }
+
+  section { position: relative; }
+
+  /* ============================================================
+     REVEAL AU SCROLL (discret)
+     ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================================
+     NAVIGATION
+     ============================================================ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 24px 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+  }
+  .nav.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(180%) blur(12px);
+    padding: 14px 0;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    letter-spacing: 0.35em;
+    color: var(--blanc);
+    transition: color 0.4s ease;
+  }
+  .nav.scrolled .logo { color: var(--noir); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    transition: color 0.4s ease, opacity 0.3s ease;
+    position: relative;
+  }
+  .nav.scrolled .nav-links a { color: var(--noir); }
+  .nav-links a:hover { opacity: 0.6; }
+
+  .nav-toggle {
+    display: none;
+    width: 26px; height: 20px;
+    position: relative;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 1100;
+  }
+  .nav-toggle span {
+    position: absolute; left: 0; width: 100%; height: 1px;
+    background: var(--blanc);
+    transition: all 0.35s ease;
+  }
+  .nav.scrolled .nav-toggle span { background: var(--noir); }
+  .nav-toggle span:nth-child(1) { top: 0; }
+  .nav-toggle span:nth-child(2) { top: 9px; }
+  .nav-toggle span:nth-child(3) { top: 18px; }
+
+  /* ============================================================
+     1. ACCUEIL / HERO
+     ============================================================ */
+  .hero {
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--blanc);
+    position: relative;
+    background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%),
+                url('https://placehold.co/1920x1080/111111/cccccc?text=OZZA+%E2%80%94+Visuel+Veste+Intelligente') center/cover no-repeat;
+  }
+
+  .hero-content { max-width: 780px; padding: 0 24px; }
+
+  .hero .eyebrow { color: rgba(255,255,255,0.85); }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.15;
+    margin-bottom: 22px;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: rgba(255,255,255,0.85);
+    max-width: 520px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-cue .line {
+    width: 1px; height: 40px;
+    background: rgba(255,255,255,0.5);
+    overflow: hidden;
+    position: relative;
+  }
+  .scroll-cue .line::after {
+    content: '';
+    position: absolute;
+    top: -100%; left: 0;
+    width: 100%; height: 100%;
+    background: var(--blanc);
+    animation: scrollDown 2s infinite ease-in-out;
+  }
+  @keyframes scrollDown {
+    0% { top: -100%; }
+    60% { top: 100%; }
+    100% { top: 100%; }
+  }
+
+  /* ============================================================
+     SECTIONS GENERIQUES
+     ============================================================ */
+  .section { padding: 140px 0; }
+  .section-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 80px;
+  }
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 20px;
+  }
+  .section-header p {
+    color: var(--gris);
+    font-size: 1.05rem;
+    font-weight: 300;
+  }
+
+  .bg-creme { background: var(--creme); }
+  .bg-noir { background: var(--noir); color: var(--blanc); }
+  .bg-noir .gris-txt { color: rgba(255,255,255,0.6); }
+
+  /* ============================================================
+     2. LA MARQUE
+     ============================================================ */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .brand-grid img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+  .brand-text .eyebrow { color: var(--or); }
+  .brand-text h2 {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    margin-bottom: 26px;
+  }
+  .brand-text p {
+    color: var(--gris);
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 1.02rem;
+  }
+
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 90px;
+    border-top: 1px solid var(--gris-clair);
+    padding-top: 40px;
+    flex-wrap: wrap;
+  }
+  .timeline-item { flex: 1; min-width: 160px; }
+  .timeline-item .year {
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--or);
+    margin-bottom: 10px;
+  }
+  .timeline-item p { color: var(--gris); font-size: 0.92rem; font-weight: 300; }
+
+  /* ============================================================
+     3. LE PRODUIT
+     ============================================================ */
+  .product {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .product-visual {
+    background: url('https://placehold.co/1200x1400/1a1a1a/999999?text=Veste+OZZA+%E2%80%94+D%C3%A9tail+Tissu') center/cover no-repeat;
+    min-height: 520px;
+  }
+  .product-info {
+    background: var(--noir);
+    color: var(--blanc);
+    padding: 90px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .product-info .eyebrow { color: var(--or); }
+  .product-info h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); margin-bottom: 26px; }
+  .product-info p { color: rgba(255,255,255,0.7); font-weight: 300; margin-bottom: 30px; }
+
+  .feature-list { margin-bottom: 40px; }
+  .feature-list li {
+    display: flex;
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+  .feature-list li:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .feature-list .num { color: var(--or); font-family: Georgia, serif; }
+
+  /* ============================================================
+     4. DEMONSTRATION
+     ============================================================ */
+  .demo-wrap { text-align: center; }
+  .demo-frame {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto 56px;
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+  }
+  .demo-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .demo-frame img.active { opacity: 1; }
+
+  .demo-dots {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .demo-dots button {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--noir);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease;
+  }
+  .demo-dots button.active { background: var(--noir); }
+
+  .demo-caption {
+    color: var(--gris);
+    font-size: 0.92rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  /* ============================================================
+     5. VALEURS
+     ============================================================ */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+  }
+  .value-card { text-align: center; padding: 0 20px; }
+  .value-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 28px;
+    border: 1px solid var(--or);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--or);
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+  }
+  .value-card h3 { font-size: 1.25rem; margin-bottom: 14px; }
+  .value-card p { color: var(--gris); font-weight: 300; font-size: 0.95rem; }
+
+  /* ============================================================
+     6. CONTACT / PRECOMMANDE
+     ============================================================ */
+  .contact {
+    background: var(--noir);
+    color: var(--blanc);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 90px;
+  }
+  .contact-intro h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin-bottom: 24px; }
+  .contact-intro p { color: rgba(255,255,255,0.65); font-weight: 300; margin-bottom: 34px; }
+
+  .contact-detail { display: flex; gap: 16px; margin-bottom: 18px; font-size: 0.95rem; }
+  .contact-detail span:first-child { color: var(--or); min-width: 100px; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.78rem; padding-top: 2px; }
+
+  form { display: flex; flex-direction: column; gap: 22px; }
+  .field { position: relative; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 10px;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    color: var(--blanc);
+    font-size: 1rem;
+    padding: 10px 0;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  .field select option { background: var(--noir); color: var(--blanc); }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--or);
+  }
+  .field input::placeholder { color: rgba(255,255,255,0.35); }
+
+  form .btn { margin-top: 12px; align-self: flex-start; }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  .form-success {
+    display: none;
+    padding: 18px 0;
+    color: var(--or);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .form-success.show { display: block; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer {
+    background: var(--noir);
+    color: rgba(255,255,255,0.45);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 36px 0;
+    font-size: 0.82rem;
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .footer-links { display: flex; gap: 26px; }
+  footer a:hover { color: var(--blanc); }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 900px) {
+    .brand-grid, .product, .contact-grid { grid-template-columns: 1fr; }
+    .product-visual { min-height: 380px; }
+    .product-info { padding: 60px 36px; }
+    .values-grid { grid-template-columns: 1fr; gap: 48px; }
+    .brand-grid { gap: 44px; }
+    .brand-grid .brand-image { order: -1; }
+  }
+
+  @media (max-width: 780px) {
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: 78%;
+      max-width: 320px;
+      background: var(--blanc);
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 48px;
+      gap: 30px;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { color: var(--noir) !important; font-size: 14px; }
+    .nav-toggle { display: block; }
+    .section { padding: 90px 0; }
+    .timeline { gap: 32px 40px; }
+  }
+
+  @media (max-width: 560px) {
+    .container { padding: 0 22px; }
+    .section-header { margin-bottom: 56px; }
+    .product-info { padding: 50px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#accueil" class="logo">OZZA</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#marque">La Marque</a></li>
+      <li><a href="#produit">Le Produit</a></li>
+      <li><a href="#demonstration">Démonstration</a></li>
+      <li><a href="#valeurs">Valeurs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     1. ACCUEIL
+     ============================================================ -->
+<header class="hero" id="accueil">
+  <div class="hero-content">
+    <span class="eyebrow">Maison française — depuis 1985</span>
+    <h1>Une veste. Mille allures.</h1>
+    <p>OZZA réinvente l'élégance intemporelle avec une technologie textile qui change de couleurs et de motifs, sur simple commande.</p>
+    <a href="#contact" class="btn">Précommander</a>
+  </div>
+  <div class="scroll-cue">
+    <span>Découvrir</span>
+    <span class="line"></span>
+  </div>
+</header>
+
+<!-- ============================================================
+     2. LA MARQUE
+     ============================================================ -->
+<section class="section" id="marque">
+  <div class="container">
+    <div class="brand-grid">
+      <div class="brand-text reveal">
+        <span class="eyebrow">La Marque</span>
+        <h2>Un héritage, une renaissance.</h2>
+        <p>Fondée en 1985 par Jean-Paul Dupont, OZZA s'est imposée comme une référence de l'élégance française. Un savoir-faire d'exception, salué dans le monde entier au tournant des années 2000.</p>
+        <p>Aujourd'hui, la maison se réinvente. Sans renier son héritage, OZZA s'adresse à une nouvelle génération, curieuse d'innovation et exigeante sur l'impact de ce qu'elle porte.</p>
+        <p>Notre conviction : le luxe de demain sera intelligent, durable et profondément personnel.</p>
+      </div>
+      <div class="brand-image reveal">
+        <img src="https://placehold.co/900x1125/e8e4dd/555555?text=Atelier+OZZA+%E2%80%94+1985" alt="Atelier OZZA, savoir-faire depuis 1985">
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="year">1985</div>
+        <p>Fondation de la maison par Jean-Paul Dupont, à Paris.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2001</div>
+        <p>Rayonnement international et reconnaissance des grandes maisons.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2018</div>
+        <p>Premiers travaux de recherche sur le textile intelligent.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2026</div>
+        <p>Lancement de la veste intelligente, symbole du renouveau OZZA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. LE PRODUIT
+     ============================================================ -->
+<section id="produit">
+  <div class="product">
+    <div class="product-visual reveal"></div>
+    <div class="product-info reveal">
+      <span class="eyebrow">Le Produit</span>
+      <h2>La veste intelligente</h2>
+      <p>Un tissu unique, conçu par OZZA, capable de modifier ses couleurs et ses motifs en temps réel, piloté depuis une application dédiée. Un seul vêtement, infiniment de styles.</p>
+
+      <ul class="feature-list">
+        <li><span class="num">01</span><span>Fibres actives OZZA, tissées en France, garantissant fluidité et confort.</span></li>
+        <li><span class="num">02</span><span>Application mobile intuitive : couleurs, motifs et intensité personnalisables.</span></li>
+        <li><span class="num">03</span><span>Mémoire de styles : enregistrez et rejouez vos compositions favorites.</span></li>
+        <li><span class="num">04</span><span>Entretien longue durée, pensé pour réduire le renouvellement de garde-robe.</span></li>
+      </ul>
+
+      <a href="#demonstration" class="btn btn-outline">Voir la démonstration</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. DEMONSTRATION
+     ============================================================ -->
+<section class="section bg-creme" id="demonstration">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Démonstration</span>
+      <h2>Un vêtement, plusieurs vies.</h2>
+      <p>Faites défiler les motifs pour découvrir la palette OZZA — chaque changement s'opère en quelques secondes, depuis votre téléphone.</p>
+    </div>
+
+    <div class="demo-wrap reveal">
+      <div class="demo-frame" id="demoFrame">
+        <img src="https://placehold.co/900x1200/0d0d0d/b08d57?text=Motif+01+%E2%80%94+Noir+%26+Or" class="active" alt="Veste OZZA, motif noir et or">
+        <img src="https://placehold.co/900x1200/1c2b3a/e4e1dc?text=Motif+02+%E2%80%94+Bleu+Nuit" alt="Veste OZZA, motif bleu nuit">
+        <img src="https://placehold.co/900x1200/6b1f1f/f7f5f2?text=Motif+03+%E2%80%94+Rouge+Bordeaux" alt="Veste OZZA, motif rouge bordeaux">
+        <img src="https://placehold.co/900x1200/f7f5f2/0d0d0d?text=Motif+04+%E2%80%94+Ivoire+Minimal" alt="Veste OZZA, motif ivoire minimal">
+      </div>
+      <div class="demo-dots" id="demoDots">
+        <button class="active" data-index="0" aria-label="Motif 1"></button>
+        <button data-index="1" aria-label="Motif 2"></button>
+        <button data-index="2" aria-label="Motif 3"></button>
+        <button data-index="3" aria-label="Motif 4"></button>
+      </div>
+      <p class="demo-caption" id="demoCaption">Noir &amp; Or — L'élégance signature OZZA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. VALEURS
+     ============================================================ -->
+<section class="section" id="valeurs">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Valeurs</span>
+      <h2>Ce qui nous engage.</h2>
+      <p>Trois piliers guident chaque geste OZZA, du fil à l'application.</p>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">I</div>
+        <h3>Innovation</h3>
+        <p>Une technologie textile propriétaire, née de quatre années de recherche en laboratoire français.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">S</div>
+        <h3>Savoir-faire</h3>
+        <p>Des ateliers français, une exigence de confection héritée de 1985, transmise avec précision.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">R</div>
+        <h3>Mode responsable</h3>
+        <p>Un vêtement, plusieurs styles : moins de pièces produites, moins de ressources consommées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. CONTACT / PRECOMMANDE
+     ============================================================ -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-intro reveal">
+        <span class="eyebrow">Précommande</span>
+        <h2>Soyez parmi les premiers.</h2>
+        <p>La veste intelligente OZZA sera disponible en édition limitée. Laissez-nous vos coordonnées pour être informé du lancement et bénéficier d'un accès prioritaire.</p>
+
+        <div class="contact-detail"><span>Maison</span><span>OZZA Paris, fondée en 1985</span></div>
+        <div class="contact-detail"><span>Email</span><span>contact@ozza-paris.fr</span></div>
+        <div class="contact-detail"><span>Atelier</span><span>Paris, France</span></div>
+      </div>
+
+      <form id="preorderForm" class="reveal">
+        <div class="field">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" name="name" placeholder="Votre nom" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="vous@email.com" required>
+        </div>
+        <div class="field">
+          <label for="size">Taille souhaitée</label>
+          <select id="size" name="size">
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M" selected>M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Réserver ma veste</button>
+        <p class="form-note">Aucun paiement requis à cette étape. Vous serez recontacté personnellement.</p>
+        <p class="form-success" id="formSuccess">Merci. Votre précommande a bien été enregistrée — OZZA vous recontactera prochainement.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <span>&copy; 2026 OZZA Paris. Tous droits réservés.</span>
+    <div class="footer-links">
+      <a href="#accueil">Accueil</a>
+      <a href="#marque">La Marque</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     NAVIGATION : fond au scroll + menu mobile
+     ============================================================ */
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  /* ============================================================
+     REVEAL AU SCROLL
+     ============================================================ */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ============================================================
+     DEMONSTRATION : carrousel de motifs
+     ============================================================ */
+  const demoImages = document.querySelectorAll('#demoFrame img');
+  const demoDots = document.querySelectorAll('#demoDots button');
+  const demoCaption = document.getElementById('demoCaption');
+  const captions = [
+    "Noir &amp; Or — L'élégance signature OZZA.",
+    "Bleu Nuit — Sobriété et profondeur.",
+    "Rouge Bordeaux — Caractère affirmé.",
+    "Ivoire Minimal — Épure absolue."
+  ];
+  let demoIndex = 0;
+
+  function setDemo(index) {
+    demoImages[demoIndex].classList.remove('active');
+    demoDots[demoIndex].classList.remove('active');
+    demoIndex = index;
+    demoImages[demoIndex].classList.add('active');
+    demoDots[demoIndex].classList.add('active');
+    demoCaption.innerHTML = captions[demoIndex];
+  }
+
+  demoDots.forEach(dot => {
+    dot.addEventListener('click', () => setDemo(parseInt(dot.dataset.index, 10)));
+  });
+
+  let demoAutoplay = setInterval(() => {
+    setDemo((demoIndex + 1) % demoImages.length);
+  }, 4000);
+
+  document.getElementById('demoFrame').addEventListener('mouseenter', () => clearInterval(demoAutoplay));
+
+  /* ============================================================
+     FORMULAIRE DE PRECOMMANDE (démonstration front-end)
+     ============================================================ */
+  const preorderForm = document.getElementById('preorderForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  preorderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formSuccess.classList.add('show');
+    preorderForm.reset();
+  });
+</script>
+
+</body>
+</html>
