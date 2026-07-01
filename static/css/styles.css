@@ -462,6 +462,108 @@ em { font-style: italic; font-family: var(--font-serif); }
 
 .j-cta:hover .j-cta-arrow { width: 30px; }
 
+/* ─── PRESSE ─── */
+#presse {
+  padding: clamp(4rem, 8vw, 7rem) var(--pad-x);
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.press-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+  margin-bottom: 2.4rem;
+}
+
+.press-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.6rem, 4vw, 3.2rem);
+  flex-wrap: wrap;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.press-quotes {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  text-align: left;
+}
+
+.press-quote p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.press-quote cite {
+  font-style: normal;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+/* ─── AVIS CLIENTS / TRUSTPILOT ─── */
+#avis {
+  padding: clamp(6rem, 10vw, 9rem) var(--pad-x);
+}
+
+.trustpilot-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.tp-logo {
+  font-weight: 500;
+  color: #00b67a;
+}
+
+.tp-stars {
+  color: #00b67a;
+  letter-spacing: 2px;
+  font-size: 0.95rem;
+}
+
+.tp-score { color: var(--ink-soft); }
+.tp-count { color: var(--ink-soft); }
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--line);
+}
+
+.review-card {
+  background: var(--paper);
+  padding: 2rem;
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 1rem 0 1.4rem;
+}
+
+.review-meta { display: flex; flex-direction: column; gap: 0.2rem; }
+.review-name { font-size: 0.85rem; font-weight: 500; }
+.review-date { font-size: 0.75rem; color: var(--ink-soft); }
+
 /* ─── MAISON ─── */
 #maison {
   padding: clamp(6rem, 10vw, 9rem) var(--pad-x);
@@ -717,6 +819,8 @@ footer {
   .maison-inner, .contact-inner { grid-template-columns: 1fr; }
   .maison-right { margin-top: 2rem; }
   .maison-img-inset { left: auto; right: 5%; }
+
+  .press-quotes, .review-grid { grid-template-columns: 1fr; }
 
   .f-row { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
