@@ -33,19 +33,34 @@ const revealObserver = new IntersectionObserver(
 );
 revealEls.forEach((el) => revealObserver.observe(el));
 
-// ─── COLLECTION FILTERS ───
-const filterButtons = document.querySelectorAll(".c-filter");
-const productCards = document.querySelectorAll(".p-card");
+// ─── OZZA CONNECT: product tabs (veste / pantalon) ───
+const connectTabs = document.querySelectorAll(".connect-tabs .c-filter");
+const connectGalleries = document.querySelectorAll(".connect-gallery .jacket-left");
+const connectInfos = document.querySelectorAll(".connect-info");
 
-filterButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    filterButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
+connectTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    connectTabs.forEach((t) => t.classList.remove("active"));
+    tab.classList.add("active");
 
-    const filter = btn.dataset.f;
-    productCards.forEach((card) => {
-      const match = filter === "all" || card.dataset.cat === filter;
-      card.classList.toggle("hidden-cat", !match);
+    const product = tab.dataset.product;
+    connectGalleries.forEach((g) => g.classList.toggle("active", g.dataset.product === product));
+    connectInfos.forEach((i) => i.classList.toggle("active", i.dataset.product === product));
+  });
+});
+
+// ─── OZZA CONNECT: colour swatches (simulated app control) ───
+document.querySelectorAll(".jacket-left").forEach((panel) => {
+  const dots = panel.querySelectorAll(".j-dot");
+  const img = panel.querySelector("img");
+  const tag = panel.querySelector(".j-color-tag");
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      dots.forEach((d) => d.classList.remove("active"));
+      dot.classList.add("active");
+      if (img) img.style.filter = dot.dataset.filter || "none";
+      if (tag) tag.textContent = dot.dataset.color;
     });
   });
 });
