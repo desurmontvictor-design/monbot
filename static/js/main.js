@@ -3,16 +3,12 @@ const nav = document.getElementById("nav");
 const burger = document.getElementById("burger");
 const drawer = document.getElementById("drawer");
 
-const onScroll = () => {
-  nav.classList.toggle("scrolled", window.scrollY > 40);
-};
+const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
 if (burger && drawer) {
-  burger.addEventListener("click", () => {
-    drawer.classList.toggle("open");
-  });
+  burger.addEventListener("click", () => drawer.classList.toggle("open"));
   drawer.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => drawer.classList.remove("open"));
   });
@@ -33,37 +29,39 @@ const revealObserver = new IntersectionObserver(
 );
 revealEls.forEach((el) => revealObserver.observe(el));
 
-// ─── OZZA CONNECT: product tabs (veste / pantalon) ───
-const connectTabs = document.querySelectorAll(".connect-tabs .c-filter");
-const connectGalleries = document.querySelectorAll(".connect-gallery .jacket-left");
-const connectInfos = document.querySelectorAll(".connect-info");
+// ─── OZZA CONNECT: tabs (veste / pantalon) ───
+const tabs = document.querySelectorAll(".connect-tabs .tab");
+const slides = document.querySelectorAll(".connect-slide");
+const infos = document.querySelectorAll(".connect-info");
 
-connectTabs.forEach((tab) => {
+tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    connectTabs.forEach((t) => t.classList.remove("active"));
+    tabs.forEach((t) => t.classList.remove("active"));
     tab.classList.add("active");
 
     const product = tab.dataset.product;
-    connectGalleries.forEach((g) => g.classList.toggle("active", g.dataset.product === product));
-    connectInfos.forEach((i) => i.classList.toggle("active", i.dataset.product === product));
+    slides.forEach((s) => s.classList.toggle("active", s.dataset.product === product));
+    infos.forEach((i) => i.classList.toggle("active", i.dataset.product === product));
   });
 });
 
 // ─── OZZA CONNECT: colour swatches (simulated app control) ───
-document.querySelectorAll(".jacket-left").forEach((panel) => {
-  const dots = panel.querySelectorAll(".j-dot");
-  const img = panel.querySelector("img");
-  const tag = panel.querySelector(".j-color-tag");
+const swatches = document.querySelectorAll(".swatch");
+const appColorLabel = document.getElementById("appColorLabel");
 
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      dots.forEach((d) => d.classList.remove("active"));
-      dot.classList.add("active");
-      if (img) img.style.filter = dot.dataset.filter || "none";
-      if (tag) tag.textContent = dot.dataset.color;
+swatches.forEach((swatch) => {
+  swatch.addEventListener("click", () => {
+    swatches.forEach((s) => s.classList.remove("active"));
+    swatch.classList.add("active");
+
+    if (appColorLabel) appColorLabel.textContent = swatch.dataset.color;
+
+    document.querySelectorAll(".connect-slide.active img").forEach((img) => {
+      img.style.filter = swatch.dataset.filter || "none";
     });
   });
 });
+if (swatches[0]) swatches[0].classList.add("active");
 
 // ─── CONTACT FORM ───
 const contactForm = document.getElementById("contactForm");
