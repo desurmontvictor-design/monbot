@@ -382,8 +382,8 @@ em { font-style: italic; font-family: var(--font-serif); }
 .p-sub { font-size: 0.8rem; color: var(--ink-soft); }
 .p-price { font-size: 0.9rem; white-space: nowrap; }
 
-/* ─── JACKET ─── */
-#jacket {
+/* ─── LA RELÈVE ─── */
+#releve {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   min-height: 90vh;
@@ -393,50 +393,10 @@ em { font-style: italic; font-family: var(--font-serif); }
   position: relative;
   overflow: hidden;
   background: var(--ink);
+  min-height: 480px;
 }
 
-.j-slides { position: relative; height: 100%; min-height: 480px; }
-
-.j-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 1s var(--ease);
-}
-
-.j-slide.active { opacity: 1; }
-
-.j-slide img { height: 100%; object-fit: cover; }
-
-.j-color-tag {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  color: var(--paper);
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  z-index: 2;
-}
-
-.j-nav {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  display: flex;
-  gap: 0.8rem;
-  z-index: 2;
-}
-
-.j-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1px solid var(--paper);
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.j-dot.active { background: var(--paper); }
+.jacket-left img { height: 100%; object-fit: cover; }
 
 .jacket-right {
   padding: clamp(3rem, 6vw, 6rem);
@@ -758,8 +718,8 @@ footer {
   .p-grid { grid-template-columns: repeat(2, 1fr); }
   .p-card--wide { grid-column: span 2; }
 
-  #jacket { grid-template-columns: 1fr; }
-  .j-slides { min-height: 60vh; }
+  #releve { grid-template-columns: 1fr; }
+  .jacket-left { min-height: 60vh; }
 
   .maison-inner, .contact-inner { grid-template-columns: 1fr; }
   .maison-right { margin-top: 2rem; }

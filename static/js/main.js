@@ -50,23 +50,6 @@ filterButtons.forEach((btn) => {
   });
 });
 
-// ─── JACKET COLOR SLIDESHOW ───
-const jSlides = document.querySelectorAll(".j-slide");
-const jDots = document.querySelectorAll(".j-dot");
-const jColorTag = document.getElementById("jColorTag");
-
-const setJacketSlide = (index) => {
-  jSlides.forEach((slide, i) => slide.classList.toggle("active", i === index));
-  jDots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-  if (jColorTag && jSlides[index]) {
-    jColorTag.textContent = jSlides[index].dataset.color;
-  }
-};
-
-jDots.forEach((dot) => {
-  dot.addEventListener("click", () => setJacketSlide(Number(dot.dataset.i)));
-});
-
 // ─── CONTACT FORM ───
 const contactForm = document.getElementById("contactForm");
 if (contactForm) {
