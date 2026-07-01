@@ -170,8 +170,10 @@
     text-align: center;
     color: var(--blanc);
     position: relative;
-    background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%),
-                url('https://placehold.co/1920x1080/111111/cccccc?text=OZZA+%E2%80%94+Visuel+Veste+Intelligente') center/cover no-repeat;
+    /* Remplacer par une photo produit 1920x1080 (16:9 paysage), JPG/WebP, < 400 Ko.
+       Préférer un visuel sombre ou avec dégradé pour garder le texte lisible. */
+    background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.68) 100%),
+                url('https://placehold.co/1920x1080/1a1a1a/1a1a1a') center/cover no-repeat;
   }
 
   .hero-content { max-width: 780px; padding: 0 24px; }
@@ -302,7 +304,8 @@
     align-items: stretch;
   }
   .product-visual {
-    background: url('https://placehold.co/1200x1400/1a1a1a/999999?text=Veste+OZZA+%E2%80%94+D%C3%A9tail+Tissu') center/cover no-repeat;
+    /* Format recommandé : 1200x1400 (portrait), JPG, < 400 Ko */
+    background: url('https://placehold.co/1200x1400/1a1a1a/999999') center/cover no-repeat;
     min-height: 520px;
   }
   .product-info {
@@ -330,51 +333,139 @@
   .feature-list .num { color: var(--or); font-family: Georgia, serif; }
 
   /* ============================================================
-     4. DEMONSTRATION
+     4. DEMONSTRATION — veste recolorable en direct
      ============================================================ */
-  .demo-wrap { text-align: center; }
-  .demo-frame {
-    position: relative;
-    max-width: 420px;
-    margin: 0 auto 56px;
-    aspect-ratio: 3/4;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+  .demo-wrap {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: center;
   }
-  .demo-frame img {
+
+  .jacket-stage { display: flex; justify-content: center; }
+
+  .jacket-frame {
+    position: relative;
+    width: min(70vw, 340px);
+    aspect-ratio: 3/4;
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,0.18));
+  }
+
+  /* Silhouette de veste dessinée en CSS (clip-path), recolorée en direct */
+  .jacket-shape,
+  .jacket-pattern {
     position: absolute;
     inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.2s ease;
+    clip-path: polygon(
+      35% 5%, 65% 5%, 78% 9%, 97% 16%,
+      89% 52%, 82% 45%, 85% 96%, 15% 96%,
+      18% 45%, 11% 52%, 3% 16%, 22% 9%
+    );
   }
-  .demo-frame img.active { opacity: 1; }
+  .jacket-shape {
+    background: var(--jacket-color, #0d0d0d);
+    transition: background 0.5s ease;
+  }
+  .jacket-pattern {
+    mix-blend-mode: overlay;
+    opacity: 0.9;
+    transition: background 0.4s ease;
+    background: none;
+  }
+  .jacket-pattern.pattern-rayures {
+    background: repeating-linear-gradient(45deg,
+      rgba(255,255,255,0.4) 0 6px, rgba(0,0,0,0.15) 6px 12px);
+  }
+  .jacket-pattern.pattern-pois {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.55) 2.2px, transparent 2.4px);
+    background-size: 16px 16px;
+  }
+  .jacket-pattern.pattern-chevrons {
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.35) 0 8px, transparent 8px 16px),
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.15) 0 8px, transparent 8px 16px);
+  }
 
-  .demo-dots {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 20px;
+  .demo-controls { text-align: left; }
+  .demo-controls .label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 16px;
   }
-  .demo-dots button {
-    width: 9px; height: 9px;
+
+  .palette-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .palette-swatches button {
+    width: 40px; height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--noir);
-    background: transparent;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: var(--c);
     cursor: pointer;
     padding: 0;
-    transition: background 0.3s ease;
+    position: relative;
+    transition: transform 0.25s ease;
   }
-  .demo-dots button.active { background: var(--noir); }
+  .palette-swatches button:hover { transform: translateY(-3px); }
+  .palette-swatches button.active { box-shadow: 0 0 0 2px var(--blanc), 0 0 0 3px var(--noir); }
+
+  .swatch-custom {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: conic-gradient(from 90deg, #ff0040, #ffb800, #34d19c, #1c2b3a, #7c3aed, #ff0040);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-custom input[type="color"] {
+    position: absolute;
+    inset: -4px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .pattern-select {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .pattern-select button {
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--gris-clair);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .pattern-select button.active,
+  .pattern-select button:hover {
+    border-color: var(--noir);
+    background: var(--noir);
+    color: var(--blanc);
+  }
 
   .demo-caption {
-    color: var(--gris);
-    font-size: 0.92rem;
+    color: var(--noir);
+    font-size: 1.05rem;
     font-weight: 300;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
   }
+  .demo-caption span { color: var(--or); }
 
   /* ============================================================
      5. VALEURS
@@ -487,12 +578,15 @@
      RESPONSIVE
      ============================================================ */
   @media (max-width: 900px) {
-    .brand-grid, .product, .contact-grid { grid-template-columns: 1fr; }
+    .brand-grid, .product, .contact-grid, .demo-wrap { grid-template-columns: 1fr; }
     .product-visual { min-height: 380px; }
     .product-info { padding: 60px 36px; }
     .values-grid { grid-template-columns: 1fr; gap: 48px; }
     .brand-grid { gap: 44px; }
     .brand-grid .brand-image { order: -1; }
+    .demo-wrap { gap: 56px; }
+    .demo-controls { text-align: center; }
+    .palette-swatches, .pattern-select { justify-content: center; }
   }
 
   @media (max-width: 780px) {
@@ -576,8 +670,9 @@
         <p>Aujourd'hui, la maison se réinvente. Sans renier son héritage, OZZA s'adresse à une nouvelle génération, curieuse d'innovation et exigeante sur l'impact de ce qu'elle porte.</p>
         <p>Notre conviction : le luxe de demain sera intelligent, durable et profondément personnel.</p>
       </div>
+      <!-- Format recommandé : 900x1125 (portrait 4:5), JPG, < 300 Ko -->
       <div class="brand-image reveal">
-        <img src="https://placehold.co/900x1125/e8e4dd/555555?text=Atelier+OZZA+%E2%80%94+1985" alt="Atelier OZZA, savoir-faire depuis 1985">
+        <img src="https://placehold.co/900x1125/e8e4dd/555555" alt="Atelier OZZA, savoir-faire depuis 1985">
       </div>
     </div>
 
@@ -637,19 +732,39 @@
     </div>
 
     <div class="demo-wrap reveal">
-      <div class="demo-frame" id="demoFrame">
-        <img src="https://placehold.co/900x1200/0d0d0d/b08d57?text=Motif+01+%E2%80%94+Noir+%26+Or" class="active" alt="Veste OZZA, motif noir et or">
-        <img src="https://placehold.co/900x1200/1c2b3a/e4e1dc?text=Motif+02+%E2%80%94+Bleu+Nuit" alt="Veste OZZA, motif bleu nuit">
-        <img src="https://placehold.co/900x1200/6b1f1f/f7f5f2?text=Motif+03+%E2%80%94+Rouge+Bordeaux" alt="Veste OZZA, motif rouge bordeaux">
-        <img src="https://placehold.co/900x1200/f7f5f2/0d0d0d?text=Motif+04+%E2%80%94+Ivoire+Minimal" alt="Veste OZZA, motif ivoire minimal">
+      <div class="jacket-stage">
+        <div class="jacket-frame" id="jacketFrame" aria-label="Aperçu de la veste OZZA, couleur et motif personnalisables">
+          <div class="jacket-shape" id="jacketShape"></div>
+          <div class="jacket-pattern" id="jacketPattern"></div>
+        </div>
       </div>
-      <div class="demo-dots" id="demoDots">
-        <button class="active" data-index="0" aria-label="Motif 1"></button>
-        <button data-index="1" aria-label="Motif 2"></button>
-        <button data-index="2" aria-label="Motif 3"></button>
-        <button data-index="3" aria-label="Motif 4"></button>
+
+      <div class="demo-controls">
+        <span class="label">Couleur</span>
+        <div class="palette-swatches" id="paletteSwatches">
+          <button class="active" style="--c:#0d0d0d" data-color="#0d0d0d" data-name="Noir Signature" aria-label="Noir Signature"></button>
+          <button style="--c:#f4f1ea" data-color="#f4f1ea" data-name="Ivoire" aria-label="Ivoire"></button>
+          <button style="--c:#b08d57" data-color="#b08d57" data-name="Or Vieilli" aria-label="Or Vieilli"></button>
+          <button style="--c:#1c2b3a" data-color="#1c2b3a" data-name="Bleu Nuit" aria-label="Bleu Nuit"></button>
+          <button style="--c:#6b1f1f" data-color="#6b1f1f" data-name="Bordeaux" aria-label="Bordeaux"></button>
+          <button style="--c:#2f3d33" data-color="#2f3d33" data-name="Vert Sapin" aria-label="Vert Sapin"></button>
+          <button style="--c:#c9c4ba" data-color="#c9c4ba" data-name="Gris Perle" aria-label="Gris Perle"></button>
+          <button style="--c:#a15c3e" data-color="#a15c3e" data-name="Terracotta" aria-label="Terracotta"></button>
+          <label class="swatch-custom" aria-label="Choisir une couleur personnalisée">
+            <input type="color" id="customColor" value="#0d0d0d">
+          </label>
+        </div>
+
+        <span class="label">Motif</span>
+        <div class="pattern-select" id="patternSelect">
+          <button class="active" data-pattern="uni">Uni</button>
+          <button data-pattern="rayures">Rayures</button>
+          <button data-pattern="pois">Pois</button>
+          <button data-pattern="chevrons">Chevrons</button>
+        </div>
+
+        <p class="demo-caption" id="demoCaption"><span id="demoColorName">Noir Signature</span> — <span id="demoPatternName">Uni</span></p>
       </div>
-      <p class="demo-caption" id="demoCaption">Noir &amp; Or — L'élégance signature OZZA.</p>
     </div>
   </div>
 </section>
@@ -778,37 +893,50 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ============================================================
-     DEMONSTRATION : carrousel de motifs
+     DEMONSTRATION : veste recolorable en direct (couleur libre + motifs)
      ============================================================ */
-  const demoImages = document.querySelectorAll('#demoFrame img');
-  const demoDots = document.querySelectorAll('#demoDots button');
-  const demoCaption = document.getElementById('demoCaption');
-  const captions = [
-    "Noir &amp; Or — L'élégance signature OZZA.",
-    "Bleu Nuit — Sobriété et profondeur.",
-    "Rouge Bordeaux — Caractère affirmé.",
-    "Ivoire Minimal — Épure absolue."
-  ];
-  let demoIndex = 0;
+  const jacketFrame = document.getElementById('jacketFrame');
+  const jacketPattern = document.getElementById('jacketPattern');
+  const paletteSwatches = document.querySelectorAll('#paletteSwatches button');
+  const customColor = document.getElementById('customColor');
+  const patternButtons = document.querySelectorAll('#patternSelect button');
+  const demoColorName = document.getElementById('demoColorName');
+  const demoPatternName = document.getElementById('demoPatternName');
 
-  function setDemo(index) {
-    demoImages[demoIndex].classList.remove('active');
-    demoDots[demoIndex].classList.remove('active');
-    demoIndex = index;
-    demoImages[demoIndex].classList.add('active');
-    demoDots[demoIndex].classList.add('active');
-    demoCaption.innerHTML = captions[demoIndex];
+  const patternLabels = {
+    uni: 'Uni',
+    rayures: 'Rayures',
+    pois: 'Pois',
+    chevrons: 'Chevrons'
+  };
+
+  function setJacketColor(hex, name) {
+    jacketFrame.style.setProperty('--jacket-color', hex);
+    demoColorName.textContent = name;
   }
 
-  demoDots.forEach(dot => {
-    dot.addEventListener('click', () => setDemo(parseInt(dot.dataset.index, 10)));
+  function setJacketPattern(pattern) {
+    jacketPattern.className = 'jacket-pattern' + (pattern !== 'uni' ? ' pattern-' + pattern : '');
+    demoPatternName.textContent = patternLabels[pattern];
+    patternButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.pattern === pattern));
+  }
+
+  paletteSwatches.forEach(swatch => {
+    swatch.addEventListener('click', () => {
+      paletteSwatches.forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      setJacketColor(swatch.dataset.color, swatch.dataset.name);
+    });
   });
 
-  let demoAutoplay = setInterval(() => {
-    setDemo((demoIndex + 1) % demoImages.length);
-  }, 4000);
+  customColor.addEventListener('input', () => {
+    paletteSwatches.forEach(s => s.classList.remove('active'));
+    setJacketColor(customColor.value, 'Teinte personnalisée');
+  });
 
-  document.getElementById('demoFrame').addEventListener('mouseenter', () => clearInterval(demoAutoplay));
+  patternButtons.forEach(btn => {
+    btn.addEventListener('click', () => setJacketPattern(btn.dataset.pattern));
+  });
 
   /* ============================================================
      FORMULAIRE DE PRECOMMANDE (démonstration front-end)
