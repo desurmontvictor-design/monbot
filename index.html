@@ -552,15 +552,31 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; }
   transition: background .6s var(--ease);
   pointer-events: none;
 }
-.jacket {
+/* Scène 3D : la veste pivote sur elle-même (recto / verso) */
+.jacket3d {
   width: min(100%, 380px);
-  height: auto;
-  cursor: pointer;
-  filter: drop-shadow(0 40px 70px rgba(0,0,0,.55));
-  transition: transform .6s var(--ease);
-  --jkt-l: 0%;
+  perspective: 1600px;
+  cursor: grab;
+  touch-action: pan-y; /* le glisser horizontal pivote, le vertical défile */
+  outline: none;
 }
-.jacket:hover { transform: translateY(-6px); }
+.jacket3d:active { cursor: grabbing; }
+.jacket-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 360 / 470;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--ry, -18deg));
+}
+.jacket {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 40px 70px rgba(0,0,0,.55));
+}
+.jacket-back { transform: rotateY(180deg); }
 .jacket .fill { fill: var(--jkt); transition: fill .6s var(--ease); }
 .jacket-caption {
   font-size: 12px;
@@ -924,12 +940,15 @@ footer {
         </div>
       </div>
 
-      <!-- La veste : SVG cousu main, recolorable -->
+      <!-- La veste : SVG cousu main, recolorable, pivotable à 360° -->
       <div class="jacket-wrap rv" style="--d:.15s">
         <div class="jacket-glow"></div>
 
-        <svg class="jacket" id="jacket" viewBox="0 0 360 470" role="img"
-             aria-label="Veste OZZA — cliquer pour changer de teinte" tabindex="0">
+        <div class="jacket3d" id="jacketStage" tabindex="0" role="img"
+             aria-label="Veste OZZA en rotation — glisser pour pivoter, cliquer pour changer de teinte">
+        <div class="jacket-card" id="jacketCard">
+
+        <svg class="jacket" id="jacket" viewBox="0 0 360 470" aria-hidden="true">
           <defs>
             <!-- Modelé général : lumière en haut, ombre en bas -->
             <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
@@ -1059,8 +1078,45 @@ footer {
           </g>
         </svg>
 
+        <!-- Dos de la veste (mêmes gabarits, détails dos) -->
+        <svg class="jacket jacket-back" viewBox="0 0 360 470" aria-hidden="true">
+          <g stroke="rgba(255,255,255,.09)" stroke-width="1">
+            <use href="#sleeveL" class="fill"/>
+            <use href="#sleeveL" class="fill" transform="translate(360,0) scale(-1,1)"/>
+            <use href="#torsoL"  class="fill"/>
+            <use href="#torsoL"  class="fill" transform="translate(360,0) scale(-1,1)"/>
+          </g>
+          <g fill="#000" opacity=".08">
+            <use href="#sleeveL"/>
+            <use href="#sleeveL" transform="translate(360,0) scale(-1,1)"/>
+          </g>
+          <g stroke="rgba(0,0,0,.14)" stroke-width="1" fill="none">
+            <path d="M72,100 C92,120 104,138 111,158"/>
+            <path d="M288,100 C268,120 256,138 249,158"/>
+          </g>
+          <!-- Col vu de dos -->
+          <path class="fill" stroke="rgba(0,0,0,.22)" stroke-width="1"
+                d="M150,50 C161,44 199,44 210,50 L205,68 C194,61 166,61 155,68 Z"/>
+          <path fill="#000" opacity=".1"
+                d="M150,50 C161,44 199,44 210,50 L205,68 C194,61 166,61 155,68 Z"/>
+          <!-- Couture centrale dos + empiècement + fentes -->
+          <g stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none">
+            <path d="M180,68 L180,437"/>
+            <path d="M116,134 C150,148 210,148 244,134"/>
+            <path d="M147,438 L150,396"/>
+            <path d="M213,438 L210,396"/>
+          </g>
+          <!-- Modelé global -->
+          <g clip-path="url(#jacketClip)">
+            <rect x="0" y="0" width="360" height="470" fill="url(#shade)"/>
+          </g>
+        </svg>
+
+        </div><!-- /jacket-card -->
+        </div><!-- /jacket3d -->
+
         <p class="jacket-caption"><b id="capRef">N°01</b> — <span id="capName">Noir Minuit</span></p>
-        <p class="jacket-hint">Cliquer sur la veste pour changer de teinte</p>
+        <p class="jacket-hint">Glisser pour pivoter · cliquer pour changer de teinte</p>
       </div>
     </div>
 
@@ -1274,14 +1330,58 @@ eclat.addEventListener('input', () => {
   setColor(current, false);
 });
 
-/* Cliquer la veste fait défiler les teintes */
-jacket.addEventListener('click', () => setColor((current + 1) % colorways.length));
-jacket.addEventListener('keydown', e => {
+/* ----- Rotation 360° : glisser pour pivoter, repos = rotation lente ----- */
+const stage = document.getElementById('jacketStage');
+const card  = document.getElementById('jacketCard');
+
+let ry = -18;            /* angle courant (degrés) */
+let dragging = false;
+let startX = 0, startRy = 0, moved = 0;
+let idleAt = 0;          /* reprise de la rotation auto après interaction */
+
+const applyRy = () => card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+applyRy();
+
+stage.addEventListener('pointerdown', e => {
+  dragging = true; moved = 0;
+  startX = e.clientX; startRy = ry;
+  stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove', e => {
+  if (!dragging) return;
+  const dx = e.clientX - startX;
+  moved = Math.max(moved, Math.abs(dx));
+  ry = startRy + dx * .5;
+  applyRy();
+});
+const endDrag = () => {
+  if (!dragging) return;
+  dragging = false;
+  idleAt = performance.now() + 3000;
+  /* un simple clic (sans glisser) change la teinte */
+  if (moved < 6) setColor((current + 1) % colorways.length);
+};
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+
+/* Clavier : flèches pour pivoter, Entrée pour changer de teinte */
+stage.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  { ry -= 18; applyRy(); idleAt = performance.now() + 3000; }
+  if (e.key === 'ArrowRight') { ry += 18; applyRy(); idleAt = performance.now() + 3000; }
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
     setColor((current + 1) % colorways.length);
   }
 });
+
+/* Rotation lente au repos */
+if (!reduceMotion) {
+  const spin = now => {
+    if (!dragging && now > idleAt) { ry += .1; applyRy(); }
+    requestAnimationFrame(spin);
+  };
+  requestAnimationFrame(spin);
+}
 
 setColor(0, false);
 
